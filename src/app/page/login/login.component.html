@@ -1,0 +1,20 @@
+<div class = "col-md-6">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>User</label>
+      <input type="text" formControlName = "usuario" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
+      <div *ngIf="f.usuario.touched && f.usuario.invalid" class="alert alert-danger">
+        <div *ngIf="f.usuario.errors?.required">*Usuario es requerido.</div>
+    </div>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" formControlName = "password" class="form-control"  placeholder="Password">
+      <div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+        <div *ngIf="f.password.errors?.required">*Contraseña es requerido.</div>
+    </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

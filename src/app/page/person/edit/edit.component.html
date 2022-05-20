@@ -1,0 +1,177 @@
+<div class="container">
+
+    <div class="d-flex justify-content-between">
+      <h4>Editar Paciente</h4>
+      <a href="#" routerLink="/pacientes/index" class="btn btn-primaryt">Volver</a>
+    </div>
+
+    <hr>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+
+      <div class="form-group row">
+        <div class="col-md-6 ">
+          <label for="email">Identificación:</label>
+          <input
+            formControlName="identificacion"
+            id="identificacion"
+            [(ngModel)]="person.numero_documento"
+            type="text"
+            class="form-control">
+          <div *ngIf="f.identificacion.touched && f.identificacion.invalid" class="alert alert-danger">
+              <div *ngIf="f.identificacion.errors?.required">*Identificación es requerido.</div>
+              <div *ngIf="f.tipo_id.errors?.pattern">*Solo debe obtener números.</div>
+
+          </div>
+        </div>
+    </div>
+        <div class="form-group row">
+            <div class="col-md-6 ">
+              <label for="title">Tipo Identificación:</label>
+              <select
+                formControlName="tipo_id"
+                id="tipo_id"
+                [(ngModel)]="person.tipo_documento.id"
+
+                class="form-control">
+
+                <option *ngFor="let item of tipoid" [value] = "item.id">
+                  {{item.nombre}}
+                </option>
+                </select>
+              <div *ngIf="f.tipo_id.touched && f.tipo_id.invalid" class="alert alert-danger">
+                  <div *ngIf="f.tipo_id.errors?.required">*Tipo de Identificación es requerido</div>
+              </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group row">
+            <div class="col-md-6 ">
+              <label for="phone">Primer nombre:</label>
+              <input
+                formControlName="nombre1"
+                id="nombre1"
+                [(ngModel)]="person.nombre1"
+
+                type="text"
+                class="form-control">
+              <div *ngIf="f.nombre1.touched && f.nombre1.invalid" class="alert alert-danger">
+                  <div *ngIf="f.nombre1.errors?.required">*Primer nombre es requerido.</div>
+                  <div *ngIf="f.nombre1.errors?.pattern">*Solo debe contener letras.</div>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+          <div class="col-md-6 ">
+            <label for="phone">Segundo nombre:</label>
+            <input
+              formControlName="nombre2"
+              [(ngModel)]="person.nombre2"
+
+              id="nombre2"
+              type="text"
+              class="form-control">
+            <div *ngIf="f.nombre2.touched && f.nombre2.invalid" class="alert alert-danger">
+                <div *ngIf="f.nombre2.errors?.pattern">*Solo debe contener letras.</div>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-6 ">
+          <label for="phone">Primer apellido:</label>
+          <input
+            formControlName="apellido1"
+            id="apellido1"
+            [(ngModel)]="person.apellido1"
+
+            type="text"
+            class="form-control">
+          <div *ngIf="f.apellido1.touched && f.apellido1.invalid" class="alert alert-danger">
+              <div *ngIf="f.apellido1.errors?.required">*Primer apellido es requerido.</div>
+              <div *ngIf="f.apellido1.errors?.pattern">*Solo debe contener letras.</div>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+      <div class="col-md-6 ">
+        <label for="phone">Segundo apellido:</label>
+        <input
+          formControlName="apellido2"
+          id="apellido2"
+          [(ngModel)]="person.apellido2"
+
+          type="text"
+          class="form-control">
+        <div *ngIf="f.apellido2.touched && f.apellido2.invalid" class="alert alert-danger">
+            <div *ngIf="f.apellido2.errors?.pattern">*Solo debe contener letras.</div>
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-6 ">
+      <label for="title">Género:</label>
+      <select
+        formControlName="genero"
+        id="genero"
+        [(ngModel)]="person.genero.id"
+        class="form-control">
+        <option *ngFor="let item of genero" [value] = "item.id">
+          {{item.nombre}}
+        </option>
+        </select>
+      <div *ngIf="f.genero.touched && f.genero.invalid" class="alert alert-danger">
+          <div *ngIf="f.genero.errors?.required">*Tipo de género es requerido</div>
+      </div>
+    </div>
+</div>
+<div class="form-group row">
+  <div class="col-md-6 ">
+    <label for="title">Departamento:</label>
+    <select
+      formControlName="departamento"
+      id="departamento"
+      [(ngModel)]="person.departamento.id"
+      (change)="changeDepartament($event)"
+      class="form-control">
+      <option *ngFor="let item of departamentos" [value] = "item.id" >
+        {{item.nombre}}
+      </option>
+      </select>
+    <div *ngIf="f.departamento.touched && f.departamento.invalid" class="alert alert-danger">
+        <div *ngIf="f.departamento.errors?.required">*Departamento es requerido</div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <div class="col-md-6 ">
+    <label for="title">Municipio:</label>
+    <select
+      formControlName="municipio"
+      id="municipio"
+      [(ngModel)]="person.municipio.id"
+      class="form-control">
+      <option *ngFor="let item of municipiosview" [value] = "item.id" >
+        {{item.nombre}}
+      </option>
+      </select>
+    <div *ngIf="f.municipio.touched && f.municipio.invalid" class="alert alert-danger">
+        <div *ngIf="f.municipio.errors?.required">*Departamento es requerido</div>
+    </div>
+  </div>
+</div>
+
+
+
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
+    </form>
+</div>

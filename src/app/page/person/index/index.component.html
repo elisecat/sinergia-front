@@ -1,0 +1,33 @@
+<section class = "p-4">
+
+    <div class="d-flex justify-content-between">
+      <h4>Lista de pacientes</h4>
+      <a routerLink="/pacientes/create" class="btn btn-success">Crear un nuevo paciente</a>
+    </div>
+
+    <br>
+
+    <table class="table ">
+      <tr>
+        <th>Tipo documento</th>
+        <th>Documento</th>
+        <th>Nombre</th>
+        <th>Género</th>
+        <th>Departamento</th>
+        <th>Municipio</th>
+        <th width="220px">Acción</th>
+      </tr>
+      <tr *ngFor="let person of persons">
+        <td>{{ person.tipo_documento.nombre }}</td>
+        <td>{{ person.numero_documento }}</td>
+        <td>{{ person.nombre1 }} {{person.nombre2}} {{person.apellido1}} {{person.nombre2}}</td>
+        <td>{{ person.genero.nombre }}</td>
+        <td>{{ person.departamento.nombre }}</td>
+        <td>{{ person.municipio.nombre }}</td>
+        <td>
+          <a href="#" [routerLink]="['/pacientes/', 'edit', person.id  ]" class="btn btn-primary">Editar</a>
+          <button type="button" (click)="deletePerson(person.id)" class="btn btn-danger ml-2">Eliminar</button>
+        </td>
+      </tr>
+    </table>
+ </section>
